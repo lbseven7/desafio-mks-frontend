@@ -1,10 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import SkeletonLoader from "react-loading-skeleton";
-import ProductList from "../../components/cardProducts/CardProducts";
-// import api from "../../services/api";
+import CardProducts from '../../components/cardProducts/CardProducts';
 
-const page = 1
+const page = 1;
 const rows = 8;
 const sortBy = "id";
 const orderBy = "ASC";
@@ -15,32 +14,25 @@ const ProductPage = () => {
 
   const apiUrl = `https://mks-challenge-api-frontend.herokuapp.com/api/v1/products?page=${page}&rows=${rows}&sortBy=${sortBy}&orderBy=${orderBy}`;
 
-  // const apiUrl = `https://mks-challenge-api-frontend.herokuapp.com/api/v1/products?page=2&rows=5&sortBy=id&orderBy=DESC `;
+
+  const fetchProducts = useCallback(async () => {
+    try {
+      const response = await axios.get(apiUrl);
+      setProducts(response.data.products);
+      setLoading(false);
+
+    } catch (error) {
+      console.error(error);
+    }
+  }, [apiUrl])
 
   useEffect(() => {
-    let hasFetched = false;
-    const fetchProducts = async () => {
-      try {
-        const response = await axios.get(apiUrl);
-        // console.log("AQUI >>>>>>>>", typeof products, products);
-        setProducts(response.data);
-        setLoading(false);
-        if (!hasFetched) {
-          fetchProducts();
-          hasFetched = true;
-        }
-
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
     fetchProducts();
-  }, [apiUrl, products]);
+  }, [fetchProducts]);
 
   return (
     <div>
-      {loading ? <SkeletonLoader /> : <ProductList products={products} />}
+      {loading ? <SkeletonLoader /> : <CardProducts products={products} />}
       <h1>Componente ProductPage</h1>
     </div>
   );
