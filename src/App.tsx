@@ -7,7 +7,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 
 function App() {
   return <div className="App">
-    <h1>Desafio-mks-frontend</h1>
+    <h1>App aqui</h1>
     <ProductPage />
     {/* <Navigation /> */}
     <Router>

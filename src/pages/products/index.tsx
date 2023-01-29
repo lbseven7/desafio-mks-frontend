@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import SkeletonLoader from "react-loading-skeleton";
-import CardProducts from '../../components/cardProducts/CardProducts';
+import ProductList from "../../components/cardProducts/CardProducts";
 // import api from "../../services/api";
 
-const page = 2
+const page = 1
 const rows = 8;
 const sortBy = "id";
 const orderBy = "ASC";
@@ -18,12 +18,18 @@ const ProductPage = () => {
   // const apiUrl = `https://mks-challenge-api-frontend.herokuapp.com/api/v1/products?page=2&rows=5&sortBy=id&orderBy=DESC `;
 
   useEffect(() => {
+    let hasFetched = false;
     const fetchProducts = async () => {
       try {
         const response = await axios.get(apiUrl);
         // console.log("AQUI >>>>>>>>", typeof products, products);
         setProducts(response.data);
         setLoading(false);
+        if (!hasFetched) {
+          fetchProducts();
+          hasFetched = true;
+        }
+
       } catch (error) {
         console.log(error);
       }
@@ -34,7 +40,7 @@ const ProductPage = () => {
 
   return (
     <div>
-      {loading ? <SkeletonLoader /> : <CardProducts products={products} />}
+      {loading ? <SkeletonLoader /> : <ProductList products={products} />}
       <h1>Componente ProductPage</h1>
     </div>
   );

@@ -14,13 +14,13 @@ interface Props {
 }
 
 const CardProducts: React.FC<Props> = ({ products }) => {
-  // console.log('AQUI>>>>>>>>', products) // Um objeto com os dados do produto [8]
+
   const productsArray = Object.values(products); // Transforma o objeto em array [8]
   return (
     <Container>
       <ul>
-        {productsArray.map((product, index) => (
-          <li key={index}>
+        {productsArray.map((product) => (
+          <li key={product.id}>
             <ProductItemStyle>
               <img src={product.photo} alt={product.name} />
               <div>
