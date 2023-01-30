@@ -1,9 +1,14 @@
 import React from "react";
-import { Container, Title, CartBtn } from "./headerStyle";
-import { FaShoppingCart } from "react-icons/fa";
 // import ProductCart from "../modal/Modal";
+import { useSelector } from "react-redux";
+import { FaShoppingCart } from "react-icons/fa";
+import { Container, Title, CartBtn } from "./headerStyle";
 
 const Header: React.FC = () => {
+
+  const { products } = useSelector((rootReducer: any) => rootReducer.productReducer);
+
+  console.log(products)
   return (
     <Container>
       <Title>
