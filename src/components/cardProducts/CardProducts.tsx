@@ -1,17 +1,7 @@
 import React, { useState } from "react";
 import { Container, ProductItemStyle } from "./productStyle";
+import {Product, Props} from "../../interfaces/Product";
 
-interface Product {
-  id: number;
-  name: string;
-  description: string;
-  price: number;
-  photo: string;
-}
-
-interface Props {
-  products: Product[];
-}
 
 const CardProducts: React.FC<Props> = ({ products }) => {
   const [ modalProducts, setModalProducts ] = useState<Product[] > ([]);
@@ -22,7 +12,7 @@ const CardProducts: React.FC<Props> = ({ products }) => {
       setModalProducts([...modalProducts, product]);
     }
   };
-  
+
   return (
     <Container>
       <ul>

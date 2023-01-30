@@ -1,19 +1,7 @@
 
 import SkeletonLoader from "react-loading-skeleton";
 import CardProducts from "../cardProducts/CardProducts";
-
-interface Product {
-  id: number;
-  name: string;
-  description: string;
-  price: number;
-  photo: string;
-}
-
-interface Props {
-  products: Product[];
-  loading: boolean;
-}
+import { Props} from "../../interfaces/Product";
 
 const ProductPage = (props: Props) => {
 

@@ -1,7 +1,7 @@
 import Header from "../../components/header/Header";
 import { useEffect, useState, useCallback } from "react";
 import axios from "axios";
-import ProductPage from "../../components/productPage";
+import ProductPage from "../../components/productPage/mainPage";
 
 function Home() {
   const page = 1;
