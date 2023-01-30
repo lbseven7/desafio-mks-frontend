@@ -1,5 +1,5 @@
-import React from "react";
-import { Container, ProductItemStyle } from "./style/productStyle";
+import React, { useState } from "react";
+import { Container, ProductItemStyle } from "./productStyle";
 
 interface Product {
   id: number;
@@ -14,6 +14,15 @@ interface Props {
 }
 
 const CardProducts: React.FC<Props> = ({ products }) => {
+  const [ modalProducts, setModalProducts ] = useState<Product[] > ([]);
+  
+  const addProduct = (name: string) => {
+    const product = products.find((product) => product.name === name);
+    if (product) {
+      setModalProducts([...modalProducts, product]);
+    }
+  };
+  
   return (
     <Container>
       <ul>
@@ -25,7 +34,7 @@ const CardProducts: React.FC<Props> = ({ products }) => {
                 <h3>{product.name}</h3>
                 <p>{product.price}</p>
                 <p>{product.description}</p>
-                <button>COMPRAR</button>
+                <button onClick={() => addProduct(product.name)}>COMPRAR</button>
               </div>
             </ProductItemStyle>
           </li>
