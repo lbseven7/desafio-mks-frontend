@@ -10,10 +10,11 @@ interface IAction {
 }
 
 const productReducer = (state = initialState, action:IAction) => {
-    if (action.type === 'SET_CURRENT_PRODUCT') {
+    if (action.type === 'ADD_PRODUCT') {
       return {
       ...state,
-      product: [...state.products, action.payload,]
+      products: action.payload
+      // products: [...state.products, ...action.payload] ERRO
       }
     }
     return state

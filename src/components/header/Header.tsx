@@ -7,7 +7,7 @@ import { Container, Title, CartBtn } from "./headerStyle";
 const Header: React.FC = () => {
 
   const { products } = useSelector((rootReducer: any) => rootReducer.productReducer);
-
+ 
   console.log(products)
   return (
     <Container>
@@ -16,7 +16,7 @@ const Header: React.FC = () => {
       </Title>
       <CartBtn href="/checkout">
         <span>
-          <FaShoppingCart /> 0
+          <FaShoppingCart /> {products.length}
         </span>
       </CartBtn>
       {/* <ProductCart product={ product } /> */}
