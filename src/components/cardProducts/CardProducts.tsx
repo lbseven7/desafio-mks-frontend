@@ -8,13 +8,13 @@ const CardProducts: React.FC<Props> = ({ products }) => {
   const dispatch = useDispatch();
 
   const addProduct = (id: number) => {
-    const product = products.filter((products) => products.id === id);
+    const product = products.find((product) => product.id === id);
     if (product) {
-      setModalProducts([...modalProducts, ...product]);
+      setModalProducts([...modalProducts, product]);
+      dispatch({ type: "ADD_PRODUCT", payload: product });
     }
-    // dispatch({ type: "ADD_PRODUCT", payload: modalProducts }); aqui o dispatch não funciona
   };
-  console.log(modalProducts);
+
   useEffect(() => {
     dispatch({ type: "ADD_PRODUCT", payload: modalProducts });
   }, [modalProducts, dispatch]);
@@ -41,3 +41,4 @@ const CardProducts: React.FC<Props> = ({ products }) => {
 };
 
 export default CardProducts;
+
